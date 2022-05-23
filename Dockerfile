@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.4-apache
 
 RUN docker-php-ext-install pdo_mysql
 
@@ -19,6 +19,7 @@ RUN apt-get update && \
     snapd \
     unzip \
     wget \
+    libwebp-dev \
     libpng-dev
 
 COPY apache-conf/ /usr/local/etc/php/conf.d
@@ -27,7 +28,7 @@ COPY apache-conf/ /usr/local/etc/php/conf.d
 # RUN pecl install mcrypt-1.0.3
 # RUN docker-php-ext-enable mcrypt
 
-RUN docker-php-ext-configure gd
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install gd
 
 RUN docker-php-ext-install zip

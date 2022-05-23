@@ -5,4 +5,4 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    image: christiangroeber/php-server:7.1
+    image: christiangroeber/php-server:7.4.1
