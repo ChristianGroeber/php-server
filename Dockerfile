@@ -20,6 +20,7 @@ RUN apt-get update && \
     unzip \
     wget \
     libwebp-dev \
+    exiftool \
     libpng-dev
 
 COPY apache-conf/ /usr/local/etc/php/conf.d
@@ -27,6 +28,10 @@ COPY apache-conf/ /usr/local/etc/php/conf.d
 # RUN pecl channel-update pecl.php.net
 # RUN pecl install mcrypt-1.0.3
 # RUN docker-php-ext-enable mcrypt
+
+RUN docker-php-ext-configure exif
+RUN docker-php-ext-install exif
+RUN docker-php-ext-enable exif
 
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install gd
